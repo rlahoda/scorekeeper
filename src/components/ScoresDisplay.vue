@@ -18,7 +18,7 @@
     console.log({players});
     const {score, scoreIndex, playerIndex} = data;
     console.log({data});
-
+    
     players.value[playerIndex].scores[scoreIndex] = score;
   }
 
