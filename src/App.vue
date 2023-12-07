@@ -1,47 +1,38 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
+import UserAdd from './components/UserAdd.vue';
+import ScoresDisplay from './components/ScoresDisplay.vue';
+
+const players = ref([
+  
+  ])
+
+const showUserInit = ref(true)
+
+function handleInitialPlayerUpdate(data) {
+  players.value = data;
+  showUserInit.value = !showUserInit.value;
+}
+
+
+function handlePlayerUpdate(data) {
+  players.value = data;
+}
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+ 
+  <UserAdd v-if="showUserInit" :players="players" @playerUpdate="handlePlayerUpdate" @finishedUpdate="handleInitialPlayerUpdate">
+  </UserAdd>
+  <div v-else class="main">main
+      <ScoresDisplay :players="players" @playerUpdate="handlePlayerUpdate"></ScoresDisplay>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
